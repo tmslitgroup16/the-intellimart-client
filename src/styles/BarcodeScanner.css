@@ -1,0 +1,157 @@
+/* BarcodeScanner.css */
+body {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  background-color: white;
+}
+
+.outer-border {
+  display: flex; 
+  flex-direction: column;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.left-section, .right-section {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#scanner-instructions {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Cinzel', serif;
+}
+
+#scanner-container {
+  width: 100%; 
+  height: 60vh;
+  overflow: hidden;
+  margin-bottom: 20px; 
+  padding: 20px; 
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.right-section {
+  margin-top: 20px; 
+  margin-left: 10px;
+  overflow-y: auto;
+  height: 80vh;
+  padding: 10px;
+}
+
+.scrollable-products {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 80vh;
+  width: 100%;
+  padding: 10px;
+}
+
+#scanned-products {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  font-family: 'Cinzel', serif;
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+  color: #333;
+  font-family: 'Cinzel', serif; 
+  align-self: flex-start; 
+  margin-left: 0;
+  padding: 10px 0;
+}
+
+.right-section video {
+  display: none;
+}
+
+.logo {
+  width: 83px;
+  height: 82px;
+  position: absolute;
+  top: 14px;
+  left: 26px;
+  z-index: 2;
+}
+
+.bullet {
+  margin-right: 8px;
+  font-size: 20px;
+  color: #333;
+}
+
+/* Media Queries */
+@media (min-width: 600px) {
+  .outer-border {
+    flex-direction: row;
+  }
+
+  .left-section {
+    margin-right: 10px;
+  }
+
+  .right-section {
+    margin-top: 0;
+    margin-left: 10px;
+    height: 80vh;
+  }
+
+  .scrollable-products {
+    height: 80vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .left-section, .right-section {
+    width: 100%;
+  }
+
+  .logo {
+    position: static;
+    margin: 0 auto 20px;
+  }
+
+  #scanner-container {
+    height: 50vh;
+  }
+}
+
+@media (max-width: 1200px) {
+  .outer-border {
+    flex-direction: column;
+  }
+
+  .right-section {
+    margin-top: 0;
+    margin-left: 0;
+    order: 3; /* Change order to move section to the bottom */
+    padding: 20px; /* Add padding for separation */
+  }
+
+  #scanned-products {
+    font-size: 24px; /* Adjust font size */
+    margin-bottom: 10px;
+  }
+
+  .scrollable-products {
+    height: auto; /* Remove fixed height */
+    max-height: 50vh; /* Limit height to 50vh */
+    overflow-y: auto; /* Add vertical scroll if needed */
+  }
+}

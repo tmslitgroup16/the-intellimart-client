@@ -1,0 +1,32 @@
+.modal ul.list-disc {
+    list-style: disc;
+    margin: 0; /* Inherit or set specific margin if needed */
+    padding: 0; /* Inherit or set specific padding if needed */
+  }
+  /* Icon container */
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Icon */
+.icon {
+  width: 2rem; /* Adjust as needed */
+  height: 2rem; /* Adjust as needed */
+}
+
+.icon-text {
+  display: none;
+  position: absolute;
+  bottom: -2rem; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem; /* Adjust font size as needed */
+}
+
+/* Show text on hover */
+.icon-container:hover .icon-text {
+  display: block;
+}

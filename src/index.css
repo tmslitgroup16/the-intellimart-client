@@ -1,0 +1,42 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+input[type="text"],input[type="password"],
+input[type="email"],input[type="number"],
+input[type="tel"],
+textarea{
+    @apply w-full border my-1 py-2 px-3 rounded-2xl;
+}
+textarea{
+    height: 140px;
+}
+button{
+    @apply bg-gray-300;
+}
+button.primary{
+    background-color: #ff001d;
+    @apply bg-primary p-2 w-full text-white font-bold  rounded-2xl;
+}
+
+.background {
+    background: rgba(0, 0, 0, 0.7) url('./images/loginpage_bg.jpg') fixed; /* Set background image and make it fixed */
+    background-size: cover;
+    background-blend-mode: darken;
+    background-repeat: no-repeat; /* Prevent image tiling */
+    background-position: center; /* Center image horizontally and vertically */
+    height: 100vh; /* Set container height to 100% viewport height */
+    width: 100vw; /* Set container width to 100% viewport width */
+    position: fixed; /* Fix background image to the viewport */
+    top: 0; /* Position background image at the top */
+    left: 0; /* Position background image at the left */
+    z-index: -1; /* Place background image behind other elements */
+  }
+.main{
+    height: 200vh;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    color: white;
+}

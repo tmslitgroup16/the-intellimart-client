@@ -1,0 +1,40 @@
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .text-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .btn {
+    background-color: #4fd1c5;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #38a89d;
+  }
+  
+  .btn:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .payment-buttons button {
+      padding: 8px 12px; /* Adjust padding as needed */
+      font-size: 14px; /* Adjust font size as needed */
+    }
+  }
+  
+  

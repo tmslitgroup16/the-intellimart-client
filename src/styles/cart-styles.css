@@ -1,0 +1,89 @@
+/* cart-styles.css */
+/* Container for each cart item */
+.cart-item {
+    display: flex;
+    justify-content: center; /* Center align items horizontally */
+    align-items: center; /* Center align items vertically */
+    border: 1px solid grey; /* Set the border color you prefer */
+    margin: 10px auto; /* Add some margin for spacing */
+    padding: 10px; /* Add padding for spacing inside the item */
+    max-width: 1000px; /* Adjust the maximum width as needed */
+  }
+  
+  .cart-details {
+    flex: 1;
+    padding-right: 10px; /* Adjust padding as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Equal spacing between details */
+  }
+  
+  /* Styling for each detail */
+  .cart-details h1,
+  .cart-details p,
+  .cart-details .set_quantity,
+  .cart-details .remove_wish,
+  .cart-details .price_money {
+    margin-bottom: 10px; /* Adjust margin as needed for spacing */
+  }
+  
+  /* Apply the desired font family and text shadow to the text in each item box */
+  .cart-details h1,
+  .cart-details p {
+    font-family: 'Cinzel', serif; /* Apply the desired font family */
+    text-shadow: 0 0 10px gray-200; /* Apply the desired text shadow */
+  }
+  
+  /* Styling for image */
+  .cart-image {
+    width: 200px; /* Set the width of the image container */
+    height: 200px; /* Set the height of the image container */
+  }
+  
+  /* Styling for the image itself */
+  .cart-image img {
+    width: 100%; /* Make the image fill the entire container width */
+    height: 100%; /* Make the image fill the entire container height */
+    object-fit: cover; /* Ensure the image covers the container without stretching */
+  }
+  
+
+.cart-font {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px gray-200;
+  margin-bottom: 1rem;
+}
+
+
+  /* Quantity control styling */
+  .set_quantity {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Styling for + and - buttons */
+  .set_quantity button {
+    background-color: #eee;
+    border: 1px groove #eee;
+    cursor: pointer;
+    padding: 8px;
+    margin: 0 4px;
+  }
+  
+  .set_quantity input {
+    width: 5%; /* Set the width to 3% of the container's width */
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  .price_money h3 {
+    font-weight: normal; /* Set font weight to normal */
+  }
+  .cart-image {
+    border-left: 1px solid grey; /* Set the border color you prefer */
+    padding-left: 1rem; /* Adjust padding as needed */
+  }
+  
+  
