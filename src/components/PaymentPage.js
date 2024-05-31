@@ -197,7 +197,7 @@ const PaymentPage = () => {
 
   const handlePayment = async () => {
     try {
-      const createOrderResponse = await fetch('http://localhost:5000/create_order', {
+      const createOrderResponse = await fetch(`${REACT_APP_SERVER_URL}/create_order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -219,7 +219,7 @@ const PaymentPage = () => {
         order_id: createOrderData.id,
         handler: async (response) => {
           try {
-            const verificationResponse = await fetch('http://localhost:5000/verify_payment', {
+            const verificationResponse = await fetch(`${REACT_APP_SERVER_URL}/verify_payment`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -357,7 +357,7 @@ const PaymentPage = () => {
     formData.append('PurchaseId', PurchaseId);
     // formData.append('userPhone', userDetails.phoneNumber);
     // formData.append('invoiceUrl', url);
-    const response = await fetch('http://localhost:5000/send_invoice', {
+    const response = await fetch(`${REACT_APP_SERVER_URL}/send_invoice`, {
       method: 'POST',
       // mode: 'no-cors', //This line is creating problems; find a different solution for removing cors error
       body: formData
