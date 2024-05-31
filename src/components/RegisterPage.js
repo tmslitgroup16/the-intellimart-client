@@ -45,7 +45,7 @@ const RegisterPage = () => {
     try {
       const data = { "email": values.email }
       console.log(typeof (data), data);
-      const response = await fetch(`${REACT_APP_SERVER_URL}/send_otp`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/send_otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
