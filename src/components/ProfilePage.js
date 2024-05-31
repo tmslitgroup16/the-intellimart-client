@@ -56,8 +56,9 @@ const ProfilePage = () => {
 
     return (
         <>
-            <div className="container ">
-                <div className="profile-card-wrapper">
+            <div className="container">
+                {/* <div className="profile-card-wrapper !mt-12 !md:mt-auto"> */}
+                <div className="profile-card-wrapper !mt-28 md:!mt-0">
                     <div className="profile-card-left flex items-center justify-center ">
                         <img src={defaultProfilePic} alt="user" width="100" />
                         <div className="flex flex-col items-center justify-center">
@@ -72,7 +73,7 @@ const ProfilePage = () => {
                                 <div className="data">
                                     <h4>Name</h4>
                                     <input
-                                        type="name"
+                                        type="text"
                                         value={userDetails.fullName}
                                         onChange={(e) =>
                                             setUserDetails({ ...userDetails, fullName: e.target.value })
@@ -88,7 +89,7 @@ const ProfilePage = () => {
                                         onChange={(e) =>
                                             setUserDetails({ ...userDetails, email: e.target.value })
                                         }
-                                        disabled={PhoneAuthProvider() === 'phone' || !isEditMode}
+                                        disabled={PhoneAuthProvider() === 'password' || !isEditMode}
                                     />
                                 </div>
                                 <div className="data">
@@ -117,12 +118,7 @@ const ProfilePage = () => {
                                         }}
                                     >
                                         <FontAwesomeIcon icon={isEditMode ? faSave : faUserPen} />
-                                        {!isEditMode && (
-                                            <span className="hover-text">Edit Profile</span>
-                                        )}
-                                        {isEditMode && (
-                                            <span className="hover-text">Save</span>
-                                        )}
+                                        <span className="hover-text">{isEditMode ? " Save" : " Edit Profile"}</span>
 
                                     </button>
                                 </li>

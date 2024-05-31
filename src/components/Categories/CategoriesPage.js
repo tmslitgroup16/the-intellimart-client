@@ -57,7 +57,7 @@ const CategoriesPage = () => {
         <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: '3rem', textShadow: '0 0 10px gray-200' }} className='mb-8'>
           {superCategoryName}
         </h2>
-        <div className='grid flex items-center grid-cols-3 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-8 mx-4 md:mx-8 lg:mx-8'>
+        <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-8 mx-4 md:mx-8 lg:mx-8'>
           {newCategories.map((category) => (
             <Link key={category.id} to={`/${encodeURIComponent(superCategoryName)}/${encodeURIComponent(category.id)}`}>
               <CategoryCard category={category} />

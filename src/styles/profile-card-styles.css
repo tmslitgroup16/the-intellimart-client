@@ -234,12 +234,12 @@ body {
 }
 
 
-@media (max-width: 400px) {
+/* @media (max-width: 600px) {
 
     .profile-card-wrapper {
         flex-direction: column;
         height: 80vh;
-        width: 80vw; /* Adjusted width */
+        width: 80vw;
         margin-top:40%;
     }
 
@@ -249,6 +249,31 @@ body {
         padding-right: 20%;
         padding: 10%;
      
+    }
+
+    .profile-card-right .info_data .data {
+        width: 100%;
+    }
+} */
+
+@media (max-width: 600px) {
+    .container {
+        /* overflow-y: auto; */
+        height: 100vh;
+    }
+
+    .profile-card-wrapper {
+        flex-direction: column;
+        height: 100vh;
+        width: 80vw; /* Adjusted width */
+        margin-top: 40%;
+    }
+
+    .profile-card-left,
+    .profile-card-right {
+        width: 100%;
+        padding-right: 20%;
+        padding: 10%;
     }
 
     .profile-card-right .info_data .data {

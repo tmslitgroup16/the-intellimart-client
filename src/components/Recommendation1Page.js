@@ -65,7 +65,7 @@ const Recommendation1Page = () => {
     const getRecommendations = async (categoryNameString) => {
         try {
             const data = { "ingredients": categoryNameString }
-            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/recommend2`, {
+            const response = await fetch('http://localhost:5000/recommend2', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

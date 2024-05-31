@@ -8,7 +8,7 @@ const PolicyPage = ({ title, content }) => {
   return (
     <section className="policy-page">
       <h2 className="policy-title">{title}</h2>
-      <div className="policy-content">
+      <div className="policy-content !pb-7">
         <pre>{content}</pre>
       </div>
       <button className="back-button" onClick={() => navigate('/')}>

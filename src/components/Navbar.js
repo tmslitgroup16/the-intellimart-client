@@ -5,6 +5,7 @@ import { ReactComponent as CartIcon} from '../images/cart.svg';
 import { ReactComponent as BarsIcon } from '../images/bars.svg';
 import { ReactComponent as ClearIcon } from '../images/clear.svg';
 import { ReactComponent as MicIcon } from '../images/mic.svg';
+import { ReactComponent as SearchIcon } from '../images/search_icon.svg';
 import { ReactComponent as PurchaseHistoryIcon } from '../images/order_history.svg';
 import { ReactComponent as StoreMapIcon } from '../images/map_location.svg';
 import logo from '../images/logo.png';
@@ -133,8 +134,10 @@ export default function Navbar() {
     const [categoryName, productName] = recommendation.split(' - ');
     const { productId, categoryId } = await getProductDetails(productName);
     const superCategoryName = await getSuperCategoryName(categoryName);
-    setSearchQuery(recommendation);
+    // setSearchQuery(recommendation);
+    setSearchQuery('');
     setSearchResults([]);
+    setShowSearchModal(false);
     navigate(`/${encodeURIComponent(superCategoryName)}/${encodeURIComponent(categoryId)}/${encodeURIComponent(productId)}`);
   };
 
@@ -230,69 +233,107 @@ const [openModal, setOpenModal] = useState(false);
     setShowLogoutModal(false);
   };
 
+  const [showSearchModal, setShowSearchModal] = useState(false);
+  const handleOpenSearchModal = () => {
+    setShowSearchModal(true);
+  };
+
+  const handleCloseSearchModal = () => {
+    setShowSearchModal(false);
+    setSearchQuery('');
+    setSearchResults([]);
+  };
+
+
   return (
     <div>
-  <header className="flex justify-between items-center mt-8 py-8 px-6">
+  <header className="flex justify-between items-center mt-0 py-8 px-6">
     <div>
       <Link to="/" className="flex">
         <img src={logo} alt="The IntelliMart logo" style={{ height: '5rem' }} />
       </Link>
     </div>
 
-    <div className="flex items-center gap-8 px-10 py-3">
+    <div className="flex items-center gap-6 md:gap-8 px-10 py-3 -ml-10 md:ml-0">
       {/* Search bar */}
-      <div className="search-container" >
+    <div className="search-container">
       {!isProfilePage && !isPrivacyPage && !isReturnPage && !isShippingPage && !isTermsPage && !isPurchaseHistoryPage && (
-        <div className="relative flex items-center" style={{ width: '600px' }}>
-          <div className="relative flex items-center flex-grow" style={{ minWidth: '0' }}>
-            <input
-              ref={searchRef}
-              type="text"
-              value={searchQuery}
-              onChange={handleSearch}
-              placeholder="Search items here..."
-              className="py-1 px-3 border border-gray-300 rounded-md w-full mr-4" 
+        <>
+          {/* Mobile view */}
+          <div className="z-10 flex items-center icon-container">
+            <SearchIcon
+              className="w-8 h-8 icon cursor-pointer -mr-2"
+              onClick={handleOpenSearchModal}
             />
-            {searchQuery ? (
-              <ClearIcon
-                className="w-4 h-4 cursor-pointer"
-                onClick={handleClearSearch}
-              />
-            ) : (
-              <MicIcon
-                className="w-4 h-4 cursor-pointer"
-                onClick={handleVoiceSearch}
-              />
-            )}
-            <RecordingNotification isRecording={isRecording} />
+            <div className="icon-text">Search</div>
           </div>
-          {searchResults.length > 0 && (
-            <div className="absolute top-full left-0 z-10 bg-white border border-gray-300 rounded shadow-lg py-1 w-full">
-              {searchResults.map((result, index) => (
-                <div
-                  key={index}
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200 border-t"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => handleRecommendationClick(result)}
-                >
-                  {result}
+
+          {/* Modal for mobile view */}
+          <Modal open={showSearchModal} onClose={handleCloseSearchModal}>
+            <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-75 pt-20 pl-2 pr-2 pb-2">
+              <div className="bg-white rounded-lg shadow-md p-4 max-w-md w-full mx-auto mx-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-bold text-center w-full">Search</h2>
+                  <button
+                    onClick={handleCloseSearchModal}
+                    className="text-gray-700 hover:text-gray-900 focus:outline-none"
+                  >
+                    <CloseIcon />
+                  </button>
                 </div>
-              ))}
+                <div className="relative flex items-center">
+                  <input
+                    ref={searchRef}
+                    type="text"
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    placeholder="Search items here..."
+                    className="py-1 px-3 border border-gray-300 rounded-md w-full mr-4"
+                  />
+                  {searchQuery ? (
+                    <ClearIcon
+                      className="w-4 h-4 cursor-pointer"
+                      onClick={handleClearSearch}
+                    />
+                  ) : (
+                    <MicIcon
+                      className="w-4 h-4 cursor-pointer"
+                      onClick={handleVoiceSearch}
+                    />
+                  )}
+                  <RecordingNotification isRecording={isRecording} />
+                </div>
+                {searchResults.length > 0 && (
+                  <div className="absolute z-10 bg-white border border-gray-300 rounded shadow-lg py-1">
+                    {searchResults.map((result, index) => (
+                      <div
+                        key={index}
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-200 border-t"
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => handleRecommendationClick(result)}
+                      >
+                        {result}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-        </div>
+          </Modal>
+        </>
       )}
-      </div>
-      <div className="icons-container" style={{ marginLeft: 'auto' }}>
-          <div className="flex items-center gap-4">
+    </div>
+
+      <div className="icons-container">
+          <div className="flex items-center gap-3 xs:gap-4">
         
             <div>
-            <div onClick={() => setShowLogoutModal(true)} className="py-1 icon-container" style={{ cursor: 'pointer', position: 'relative' }}>
+            <div onClick={() => setShowLogoutModal(true)} className="z-10 py-1 icon-container" style={{ cursor: 'pointer', position: 'relative' }}>
               <LogoutIcon className="w-6 h-6 icon" />
               <div className="icon-text">Logout</div>
             </div>
               <Modal open={showLogoutModal} onClose={handleLogoutCancelled}>
-                <div className="bg-white rounded-lg shadow-md p-4 max-w-md mx-auto mt-20">
+                <div className="bg-white rounded-lg shadow-md p-4 max-w-md mx-auto mt-20 ml-2 mr-2 mb-2 md:ml-auto md:mr-auto md:mb-auto">
                   <h2 className="text-xl font-bold text-center w-full mb-4">Are you sure to Logout?</h2>
                   <div className="flex justify-center mt-4">
                     <button onClick={handleLogoutConfirmed} className="bg-red-500 text-white font-bold py-2 px-4 rounded mr-2 mx-6">Yes</button>
@@ -302,7 +343,7 @@ const [openModal, setOpenModal] = useState(false);
               </Modal>
             </div>
 
-            <Link to="/profile" className="py-1 icon-container" onClick={() => setSearchQuery('')}>
+            <Link to="/profile" className="z-10 py-1 icon-container" onClick={() => setSearchQuery('')}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 icon">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
               </svg>
@@ -310,7 +351,7 @@ const [openModal, setOpenModal] = useState(false);
             </Link>
 
           <div>
-          <div className="py-1 icon-container" onClick={handleOpen} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="z-10 py-1 icon-container" onClick={handleOpen} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <span style={{ fontSize: '1.5rem' }}>🪙</span>
             <span className="icon-text">Credit Points</span>
           </div>
@@ -321,7 +362,7 @@ const [openModal, setOpenModal] = useState(false);
               aria-labelledby="credit-points-modal-title"
               aria-describedby="credit-points-modal-description"
             >
-              <div className="bg-white rounded-lg shadow-md p-4 max-w-md mx-auto mt-20">
+              <div className="bg-white rounded-lg shadow-md p-4 ml-2 mr-2 mb-2 md:ml-auto md:mr-auto md:mb-auto max-w-md mx-auto mt-20">
                 <div className="flex justify-between items-center mb-4">
                   <h2 id="credit-points-modal-title" className="text-xl font-bold text-center w-full">
                     Credit Points
@@ -335,31 +376,31 @@ const [openModal, setOpenModal] = useState(false);
                 </p>
                 <ul className="list-disc pl-6 mb-4">
                   <li>
-                    🪙 1 credit point = ₹1
+                  • 🪙 1 credit point = ₹1
                   </li>
                   <li>
-                    Minimum Bill Amount (i.e., Net Amount) should be ₹200 or above to earn credit points for your next shopping.
+                  • Minimum Bill Amount (i.e., Net Amount) should be ₹200 or above to earn credit points for your next shopping.
                   </li>
                   <li>
-                    You'll earn credit points worth 4% of your Bill Amount (round-off value). They'll be added to your IntelliMart account after successful payment.
+                  • You'll earn credit points worth 4% of your Bill Amount (round-off value). They'll be added to your IntelliMart account after successful payment.
                   </li>
                 </ul>
               </div>
             </Modal>
           </div>
 
-          <Link to="/cart" className="py-1 icon-container" onClick={() => setSearchQuery('')}>
+          <Link to="/cart" className="z-10 py-1 icon-container" onClick={() => setSearchQuery('')}>
             <CartIcon className="w-6 h-6 icon" />
             <span className="icon-text">My Cart</span>
           </Link>
 
-          <Link to="/purchase-history" className="py-1 icon-container" onClick={() => setSearchQuery('')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Link to="/purchase-history" className="z-10 py-1 icon-container" onClick={() => setSearchQuery('')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <PurchaseHistoryIcon className="w-6 h-6 icon" />
             <span className="icon-text">Purchase History</span>
           </Link>
 
           <div>
-          <div className="py-1 icon-container" onClick={handleOpenModal} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="z-10 py-1 icon-container" onClick={handleOpenModal} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <StoreMapIcon className="w-6 h-6 icon" />
             <span className="icon-text">Store Map</span>
           </div>
@@ -369,7 +410,7 @@ const [openModal, setOpenModal] = useState(false);
                 onClick={handleCloseModal}
               >
                 <div
-                  className="relative bg-white rounded-lg shadow-md max-w-full mx-auto"
+                  className="relative bg-white rounded-lg shadow-md max-w-full mx-auto ml-2 mr-2 mb-2"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div className="flex justify-between items-center mb-4 p-4">
@@ -393,7 +434,7 @@ const [openModal, setOpenModal] = useState(false);
               <BarsIcon className="w-6 h-6" />
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white border border-gray-300 rounded shadow-lg py-1">
+              <div className="z-10 absolute right-0 mt-2 bg-white border border-gray-300 rounded shadow-lg py-1">
                 <Link
                   to="/privacy-policy"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200 "
@@ -435,5 +476,6 @@ const [openModal, setOpenModal] = useState(false);
       </header>
     </div>
   );
+
 }
 

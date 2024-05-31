@@ -58,7 +58,7 @@ const PurchaseHistoryPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mb-14">
       <h2
                 style={{ fontFamily: "'Cinzel', serif", fontSize: '2rem', textShadow: '0 0 10px gray-200' }}
                 className="mb-8 text-center"

@@ -39,6 +39,8 @@ function CartPage() {
         } else {
           navigate('/recommendation-2');
         }
+        // navigate('/recommendation-2');
+
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -118,12 +120,14 @@ function CartPage() {
 
               {cartItems.length > 0 ? (
                 cartItems.map((item) => (
+                  <div className=''>
                   <CartItem
                     key={item.id}
                     item={item}
                     removeFromCart={removeFromCart}
                     updateQuantity={updateQuantity}
                   />
+                  </div>
                 ))
               ) : (
                 <p
@@ -134,7 +138,7 @@ function CartPage() {
                 </p>
               )}
             </div>
-            <div className="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5">
+            <div className="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5 md:mb-auto mb-36">
               <div style={{ textAlign: 'center' }}>
 
 
@@ -182,7 +186,7 @@ function CartPage() {
 
       {/* Modal */}
       <Modal open={openModal} onClose={handleModalClose}>
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-md p-4 max-w-md mx-auto">
+        <div className="bg-white rounded-lg shadow-md p-4 ml-2 mr-2 mb-2 md:ml-auto md:mr-auto md:mb-auto max-w-md mx-auto mt-56">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-center w-full">Disclaimer</h2>
             <button onClick={handleModalClose} aria-label="close" className="focus:outline-none">
@@ -194,10 +198,10 @@ function CartPage() {
           </p> */}
           <ul className="list-disc pl-6">
             <li>
-              Minimum purchase (i.e., Gross Amount) should be of ₹11 or above to avail the use of credit points.
+            • Minimum purchase (i.e., Gross Amount) should be of ₹11 or above to avail the use of credit points.
             </li>
             <li>
-              Bill Amount (i.e., Net Amount) can't be less than ₹10 even after using credit points.
+            • Bill Amount (i.e., Net Amount) can't be less than ₹10 even after using credit points.
             </li>
           </ul>
         </div>

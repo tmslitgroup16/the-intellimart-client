@@ -33,36 +33,22 @@ const SuperCategoriesPage = () => {
   }, []);
 
   return (
-    <div className='text-center flex justify-center'>
-      <div className='container mx-auto  '>
-        <h2
-          style={{
-            fontFamily: "'Cinzel', serif",
-            fontSize: '3rem',
-            textShadow: '0 0 10px gray-200',
-          }}
-          className='mb-8'
-        >
-          Categories
-        </h2>
-        <div
-          className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 px-2 sm:px-4 md:px-8 lg:px-8 sm:justify-center'
-        >
-          {categories.map((category) => (
-            <Link
-              key={category.name}
-              to={`/${encodeURIComponent(category.name)}`}
-              className='mx-auto'
-            >
-              <CategoryCard category={category} />
-            </Link>
-          ))}
+    <div className='text-center'>
+        <div className='container mx-auto my-6'>
+            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: '3rem', textShadow: '0 0 10px gray-200' }} className='mb-8'>
+                Categories
+            </h2>
+            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-8 mx-4 md:mx-8 lg:mx-8'>
+                {categories.map((category) => (
+                    <Link key={category.name} to={`/${encodeURIComponent(category.name)}`}>
+                        <CategoryCard category={category} />
+                    </Link>
+                ))}
+            </div>
         </div>
-      </div>
-
-      <ScanItems />
+        <ScanItems />
     </div>
-  );
+);
 }
 
 export default SuperCategoriesPage

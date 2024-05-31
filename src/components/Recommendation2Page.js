@@ -75,7 +75,7 @@ const Recommendation2Page = () => {
             console.log(categoryNameString)
             const data = { "ingredients": categoryNameString }
             console.log(typeof (data), data);
-            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/recommend2`, {
+            const response = await fetch('http://localhost:5000/recommend2', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

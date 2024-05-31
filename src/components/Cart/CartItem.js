@@ -34,7 +34,7 @@ function CartItem({ item, removeFromCart, updateQuantity }) {
               name=""
               value={item.quantity}
               onChange={handleQuantityChange}
-              className="w-8 text-center"
+              className="!w-8 text-center"
             />
             <button
               onClick={() => updateQuantity(item.id, item.quantity + 1)}

@@ -311,6 +311,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
             boxShadow: 24,
             p: 4,
           }}
+          className="w-72"
         >
           {/*<Typography variant="h6" component="h2">
             Ingredients Information
@@ -319,7 +320,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
             <b>Ingredients needed for the dish:</b>
             <ul>
               {neededCategory.map((ingredient, index) => (
-                <li key={index}>{capitalizeFirstLetter(ingredient)}</li>
+                <li key={index}>• {capitalizeFirstLetter(ingredient)}</li>
               ))}
             </ul>
           </Typography>
@@ -327,7 +328,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
             <b>Ingredients present in the cart:</b>
             <ul>
               {presentCategory.map((ingredient, index) => (
-                <li key={index}>{capitalizeFirstLetter(ingredient)}</li>
+                <li key={index}>• {capitalizeFirstLetter(ingredient)}</li>
               ))}
             </ul>
           </Typography>

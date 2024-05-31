@@ -181,7 +181,7 @@ const BarcodeScanner = () => {
         </div>
         <div className="right-section">
           <div id="scanned-products">Scanned Products:</div>
-          <div class="scrollable-products">
+          <div className="scrollable-products">
             {scannedProducts.map((product, index) => (
               <p key={index}>
                 &#8226; {product.ProductName} - ₹{product.Price} [{product.Location}]

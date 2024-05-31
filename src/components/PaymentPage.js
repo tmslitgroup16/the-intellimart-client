@@ -183,21 +183,21 @@ const PaymentPage = () => {
   }, [PurchaseId]);
 
 
-  const [isWideScreen, setIsWideScreen] = useState(false);
+  // const [isWideScreen, setIsWideScreen] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsWideScreen(window.innerWidth > 600);
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsWideScreen(window.innerWidth > 600);
+  //   };
 
-    handleResize(); // Check on initial render
-    window.addEventListener('resize', handleResize); // Listen for window resize
-    return () => window.removeEventListener('resize', handleResize); // Cleanup
-  }, []);
+  //   handleResize(); // Check on initial render
+  //   window.addEventListener('resize', handleResize); // Listen for window resize
+  //   return () => window.removeEventListener('resize', handleResize); // Cleanup
+  // }, []);
 
   const handlePayment = async () => {
     try {
-      const createOrderResponse = await fetch(`${process.env.REACT_APP_SERVER_URL}/create_order`, {
+      const createOrderResponse = await fetch('http://localhost:5000/create_order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -219,7 +219,7 @@ const PaymentPage = () => {
         order_id: createOrderData.id,
         handler: async (response) => {
           try {
-            const verificationResponse = await fetch(`${process.env.REACT_APP_SERVER_URL}/verify_payment`, {
+            const verificationResponse = await fetch('http://localhost:5000/verify_payment', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -333,17 +333,33 @@ const PaymentPage = () => {
       contentType: 'application/pdf'
     };
     const invoiceRef = ref(storage, fileName);
+    // let flag=false;
     uploadBytes(invoiceRef, blob, metadata).then((snapshot) => {
       console.log('Uploaded the pdf to Cloud Storage!');
+      // flag=true;
     });
+
+    // let url = "";
+    // if (flag) { 
+    //   url = getDownloadURL(invoiceRef);
+    //   flag=false;
+    // }
+
+    // console.log(userDetails.email)
+    // console.log(userDetails.phoneNumber)
+    // console.log(url)
+    
 
     // Send the invoice via POST request
     const formData = new FormData();
     formData.append('pdfFile', blob);
     formData.append('userEmail', userDetails.email);
     formData.append('PurchaseId', PurchaseId);
-    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/send_invoice`, {
+    // formData.append('userPhone', userDetails.phoneNumber);
+    // formData.append('invoiceUrl', url);
+    const response = await fetch('http://localhost:5000/send_invoice', {
       method: 'POST',
+      // mode: 'no-cors', //This line is creating problems; find a different solution for removing cors error
       body: formData
     });
     if (response.ok) {
@@ -477,11 +493,6 @@ const PaymentPage = () => {
             </div>
           </div>
 
-
-
-
-
-
           <div style={{ position: 'fixed', bottom: '20px', left: '20px' }}>
             <button
               className="bg-gradient-to-r from-teal-500 to-teal-700 text-white px-6 py-3 text-lg"
@@ -501,9 +512,14 @@ const PaymentPage = () => {
 
         </div>
       ) : (
-        <div>
-          <div className="flex flex-col justify-center items-center h-screen">
-            <div className="text-center mb-6">
+        <div style={{ marginTop: '70px' }}>
+          <div style={{ marginLeft: '32px' }}>
+              <Link to="/" className="flex">
+                <img src={logo} alt="The IntelliMart logo" style={{ height: '4.2rem' }} />
+              </Link>
+            </div>
+          <div className="flex flex-col justify-center items-center">
+            <div className="text-center mb-4">
               <p className="font-bold"
                 style={{
                   fontFamily: "'Cinzel', serif",
@@ -512,7 +528,7 @@ const PaymentPage = () => {
                 Thank You for shopping with us!
               </p>
             </div>
-            <div className="text-center mb-6">
+            <div className="text-center mb-4">
               <p className="font-bold"
                 style={{
                   fontFamily: "'Cinzel', serif",
@@ -521,7 +537,7 @@ const PaymentPage = () => {
                 Invoice has been sent to your Email.
               </p>
             </div>
-            <div className="text-center">
+            <div className="text-center mb-4">
               {earnedCredits > 0 &&
                 <p className="font-bold"
                   style={{
@@ -541,6 +557,14 @@ const PaymentPage = () => {
                 </p>
               }
             </div>
+            <div className="text-center">
+              <button
+                  className="bg-gradient-to-r from-teal-500 to-teal-700 text-white px-6 py-3 text-lg"
+                  onClick={getInvoiceUrl}
+                >
+                  QR code for Invoice
+                </button>
+              </div>
           </div>
 
 
@@ -552,7 +576,7 @@ const PaymentPage = () => {
             >
               Shop Again
             </button>
-            {isWideScreen ? (
+            {/* {isWideScreen ? (
               <button
                 className="bg-gradient-to-r from-teal-500 to-teal-700 text-white px-6 py-3 text-lg"
                 onClick={getInvoiceUrl}
@@ -568,7 +592,7 @@ const PaymentPage = () => {
               >
                  Invoice
               </p>
-            )}
+            )} */}
             <button
               className="bg-gradient-to-r from-teal-500 to-teal-700 text-white px-6 py-3 text-lg"
               onClick={() => setShowLogoutModal(true)}
@@ -584,7 +608,7 @@ const PaymentPage = () => {
             aria-labelledby="invoice-modal-title"
             aria-describedby="invoice-modal-description"
           >
-            <div className="bg-white rounded-lg shadow-md p-4 max-w-md mx-auto mt-20">
+            <div className="bg-white rounded-lg shadow-md p-4 ml-2 mr-2 mb-2 md:ml-auto md:mr-auto md:mb-auto max-w-md mx-auto mt-20">
               <div className="flex justify-between items-center mb-4">
                 <h2 id="invoice-modal-title" className="text-xl font-bold text-center w-full">
                   Scan the QR code for invoice
@@ -600,7 +624,7 @@ const PaymentPage = () => {
           </Modal>
 
           <Modal open={showLogoutModal} onClose={handleLogoutCancelled}>
-            <div className="bg-white rounded-lg shadow-md p-4 max-w-md mx-auto mt-20">
+            <div className="bg-white rounded-lg shadow-md p-4 max-w-md mx-auto mt-20 ml-2 mr-2 mb-2 md:ml-auto md:mr-auto md:mb-auto">
               <h2 className="text-xl font-bold text-center w-full mb-4">Are you sure to Logout?</h2>
               <div className="flex justify-center mt-4">
                 <button onClick={handleLogoutConfirmed} className="bg-red-500 text-white font-bold py-2 px-4 rounded mr-2 mx-6">Yes</button>

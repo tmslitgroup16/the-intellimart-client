@@ -134,7 +134,7 @@ const PhonePage = () => {
                   disabled={loading}
                 >
                   {loading && (
-                    <CgSpinner size={20} className="absolute left-4 top-1/2 -translate-y-1/2 animate-spin" />
+                    <CgSpinner size={20} className="absolute animate-spin" />
                   )}
                   <span className={loading ? 'ml-8 opacity-0' : 'ml-0'}>Verify OTP</span>
                 </button>
