@@ -9,6 +9,7 @@ import { RecaptchaVerifier, signInWithPhoneNumber, updateProfile } from "firebas
 import { toast, Toaster } from "react-hot-toast";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { CgSpinner } from "react-icons/cg";
+import '../styles/OtpInputStyles.css';
 
 const PhonePage = () => {
 
@@ -99,97 +100,103 @@ const PhonePage = () => {
       });
   }
 
-  return (
-    <div className="background main">
-        <Toaster toastOptions={{ duration: 4000 }} />
-        <div id="recaptcha-container"></div>
-        {user ? (navigate("/recommendation-1")
-        ) : (
-          <>
-        <div className="p-4">
-            <img src={logo} alt="Intellimart logo" style={{ height: '8rem' }} />
-        </div>
-        <div className="text-center mb-3">
-            <h1 style={{ fontFamily: "'Dancing Script', cursive", fontSize: '4rem', textShadow: '0 0 10px yellow' }}>
-                Welcome to IntelliMart
-            </h1>
-        </div>
-        <div className="mb-64 rounded-lg shadow-md relative z-10 ">
-            <h1 className="text-4xl text-center text-black-500 mb-6" style={{ fontFamily: "'Cinzel',serif" }}>Login with Phone Number</h1>
-            <div className="max-w-md mx-auto text-black">
-            {showOTP ? ( <>
-              <OtpInput
-                  value={otp}
-                  onChange={setOtp}
-                  OTPLength={6}
-                  otpType="number"
-                  disabled={false}
-                  autoFocus
-                  className="opt-container "
-                ></OtpInput>
-                <b className='text-red-500'>{errorMsg}</b>
-                <button
-                  className="w-full mt-2 py-2 text-white primary rounded-md relative"
-                  onClick={onOTPVerify}
-                  disabled={loading}
-                >
-                  {loading && (
-                    <CgSpinner size={20} className="absolute animate-spin" />
-                  )}
-                  <span className={loading ? 'ml-8 opacity-0' : 'ml-0'}>Verify OTP</span>
-                </button>
+return (
+  <div className="background main">
+      <Toaster toastOptions={{ duration: 4000 }} />
+      <div id="recaptcha-container"></div>
+      {user ? (navigate("/recommendation-1")
+      ) : (
+        <>
+      <div className="p-4">
+          <img src={logo} alt="Intellimart logo" style={{ height: '8rem' }} />
+      </div>
+      
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div className="text-center mt-16 mb-3">
+          <h1 style={{ fontFamily: "'Dancing Script', cursive", fontSize: '4rem', textShadow: '0 0 10px yellow' }}>
+              Welcome to IntelliMart
+          </h1>
+      </div>
+      <div className="mb-64 rounded-lg shadow-md relative z-10 ">
+          <h1 className="text-4xl text-center text-black-500 mb-6" style={{ fontFamily: "'Cinzel',serif" }}>Login with Phone Number</h1>
+          <div className="max-w-md mx-auto text-black">
+          {showOTP ? ( <>
+            <OtpInput
+                value={otp}
+                onChange={setOtp}
+                OTPLength={6}
+                otpType="number"
+                disabled={false}
+                autoFocus
+                className="otp-container "
+              ></OtpInput>
+              <b className='text-red-500 mt-2 flex justify-center'>{errorMsg}</b>
+              <button
+                className="w-[full] mt-2 py-2 text-white primary rounded-md relative flex justify-center mx-auto"
+                onClick={onOTPVerify}
+                disabled={loading}
+                style={{ width: '90%', }}
+              >
+                {loading && (
+                  <CgSpinner size={20} className="absolute animate-spin" />
+                )}
+                <span className={loading ? 'ml-8 opacity-0' : 'ml-0'}>Verify OTP</span>
+              </button>
 
-                <button
-                    className="w-full mt-2 py-2 text-white primary rounded-md"
-                    onClick={() => window.location.reload()}
-                >
-                    Go Back
-                </button>
-                </>
-            ) : ( <>
-              <div className="flex flex-col items-center">
-                <div style={{ marginLeft: '15px', width: '70%' }}> {/* Container with left margin */}
-                  <PhoneInput 
-                    country={"in"} value={ph} onChange={setPh}
-                    inputStyle={{ width: '100%' }} // Set the width of the phone input box
-                  />
-                </div>
-                <b className='text-red-500'>{errorMsg}</b>
-                <button
-                  className="w-full mt-2 py-2 text-white primary rounded-md relative"
-                  onClick={onSignup}
-                  disabled={loading}
-                  style={{ width: '70%', marginLeft: '16px' }}
-                >
-                  {loading && (
-                    <CgSpinner size={20} className="absolute animate-spin" />
-                  )}
-                  <span>Send OTP via SMS</span>
-                </button>
+              <button
+                  className="w-[full] mt-2 py-2 text-white primary rounded-md relative flex justify-center mx-auto"
+                  onClick={() => window.location.reload()}
+                  style={{ width: '90%', }}
+              >
+                  Go Back
+              </button>
+              </>
+          ) : ( <>
+            <div className="flex flex-col items-center">
+              <div style={{ marginLeft: '15px', width: '70%' }}> {/* Container with left margin */}
+                <PhoneInput 
+                  country={"in"} value={ph} onChange={setPh}
+                  inputStyle={{ width: '95%' }}
+                />
+              </div>
+              <b className='text-red-500'>{errorMsg}</b>
+              <button
+                className="w-full py-2 mt-5 text-white primary rounded-md relative mx-auto"
+                onClick={onSignup}
+                disabled={loading}
+                style={{ width: '70%'}}
+              >
+                {loading && (
+                  <CgSpinner size={20} className="absolute animate-spin" />
+                )}
+                <span>Send OTP via SMS</span>
+              </button>
+            </div>
+
+
+              </>
+          )}
+              <div className="text-center pt-2 text-yellow-100">
+                  To Login with Email,{' '}
+                  <Link className="underline text-red-500" to="/login">
+                      Click here
+                  </Link>
               </div>
 
-
-                </>
-            )}
-                <div className="text-center py-2 text-yellow-100">
-                    To Login with Email,{' '}
-                    <Link className="underline text-red-500" to="/login">
-                        Click here
-                    </Link>
-                </div>
-
-                <div className="text-center py-2 text-yellow-100">
-                    To Register with Email,{' '}
-                    <Link className="underline text-red-500" to="/register">
-                        Click here
-                    </Link>
-                </div>
-            </div>
-        </div>
-        </>
-        )}
-    </div>
+              <div className="text-center pb-2 text-yellow-100">
+                  To Register with Email,{' '}
+                  <Link className="underline text-red-500" to="/register">
+                      Click here
+                  </Link>
+              </div>
+          </div>
+      </div>
+      </div>
+      </>
+      )}
+  </div>
 );
+
 }
 
 export default PhonePage

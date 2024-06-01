@@ -65,7 +65,7 @@ const Recommendation1Page = () => {
     const getRecommendations = async (categoryNameString) => {
         try {
             const data = { "ingredients": categoryNameString }
-            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/recommend2`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/recommend1`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -149,10 +149,10 @@ const Recommendation1Page = () => {
                         </div>
                     </Link>
                 )}
-                <div className='absolute top-1/2 transform -translate-y-1/2 left-0 z-10'>
+                <div className=' group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
                     <BsChevronCompactLeft onClick={prevSlide} size={30} className="text-white cursor-pointer" />
                 </div>
-                <div className='absolute top-1/2 transform -translate-y-1/2 right-0 z-10'>
+                <div className=' group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
                     <BsChevronCompactRight onClick={nextSlide} size={30} className="text-white cursor-pointer" />
                 </div>
                 <div className='flex justify-center mt-4 z-20'>
@@ -167,7 +167,7 @@ const Recommendation1Page = () => {
                     ))}
                 </div>
             </div>
-            <div className="fixed bottom-0 right-0 pb-4">  {/* Position "Skip" button at bottom right */}
+            <div className="fixed bottom-0 right-0 pb-4">
                 <Link
                     to="/"
                     className="text-center text-white px-6 py-2 bg-black rounded-full"

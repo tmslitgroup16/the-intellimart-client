@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { RxDotFilled } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
@@ -100,6 +100,7 @@ const Recommendation2Page = () => {
     }));
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const carouselRef = useRef(null);
 
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
@@ -117,14 +118,28 @@ const Recommendation2Page = () => {
         setCurrentIndex(slideIndex);
     };
 
+    useEffect(() => {
+        const resizeHandler = () => {
+            if (carouselRef.current) {
+                const windowHeight = window.innerHeight;
+                carouselRef.current.style.height = `${windowHeight}px`;
+            }
+        };
+
+        window.addEventListener('resize', resizeHandler);
+        resizeHandler();
+
+        return () => {
+            window.removeEventListener('resize', resizeHandler);
+        };
+    }, []);
+
     return (
-        <div className='bg-black text-white '>
-            <div className='max-w-[1200px] h-[729px] w-full m-auto py-16 px-5 relative group'>
-                <div>
-                    <h1 className="flex flex-col justify-center items-center mt-4 sm:mt-0 sm:text-4xl md:text-4xl lg:text-4xl" style={{ fontFamily: "'Cinzel', serif", textShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}>
-                        Seems like you're looking to cook ...
-                    </h1>
-                </div>
+        <div className='bg-black text-white h-screen overflow-hidden'>
+            <div ref={carouselRef} className='max-w-screen-lg mx-auto py-16 px-5 relative group'>
+                <h1 className="text-center mb-8 text-3xl font-bold" style={{ fontFamily: "'Cinzel', serif", textShadow: '0 0 10px gray-200' }}>
+                    Seems like you're looking to cook ...
+                </h1>
                 {slides.length > 0 && (
                     <Link
                         to={{
@@ -134,55 +149,58 @@ const Recommendation2Page = () => {
                     >
                         <div
                             style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-                            className='rounded-2xl bg-center bg-cover duration-1000 relative w-full h-96 md:w-full md:h-full'
+                            className=' rounded-2xl bg-center bg-cover duration-1000 relative flex justify-center items-center w-full h-96 md:w-full md:h-full'
                         >
-                            <div className='absolute bottom-0 text-center w-full text-bold text-white bg-black bg-opacity-45 duration-1000 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl' style={{ fontFamily: "'Dancing Script', cursive", textShadow: '0 0 2px yellow' }}>
-                                {slides[currentIndex].name} [{slides[currentIndex].diet}]
+                            <div className='absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-75 text-center'>
+                                <h2 className="text-white text-2xl font-bold" style={{ fontFamily: "'Dancing Script', cursive", textShadow: '0 0 2px yellow', margin: '0' }}>
+                                    {slides[currentIndex].name}
+                                </h2>
+                                <p className="text-white text-lg" style={{ fontFamily: "'Dancing Script', cursive", textShadow: '0 0 2px yellow', margin: '0' }}>
+                                    [{slides[currentIndex].diet}]
+                                </p>
                             </div>
                         </div>
                     </Link>
                 )}
-                {/* Left Arrow */}
-                <div className=' group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-                    <BsChevronCompactLeft onClick={prevSlide} size={30} />
+               <div className=' group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                    <BsChevronCompactLeft onClick={prevSlide} size={30} className="text-white cursor-pointer" />
                 </div>
-                {/* Right Arrow */}
                 <div className=' group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-                    <BsChevronCompactRight onClick={nextSlide} size={30} />
+                    <BsChevronCompactRight onClick={nextSlide} size={30} className="text-white cursor-pointer" />
                 </div>
-
-                <div className='flex top-4 justify-center'>
-
+                <div className='flex justify-center mt-4 z-20'>
                     {slides.map((slide, slideIndex) => (
                         <div
                             key={slideIndex}
+                            className={`text-2xl cursor-pointer ${slideIndex === currentIndex ? 'text-white' : 'text-gray-500'}`}
                             onClick={() => goToSlide(slideIndex)}
-                            className='text-2xl cursor-pointer'
                         >
                             <RxDotFilled />
                         </div>
                     ))}
                 </div>
-
             </div>
-            <Link
-                to="/payment"
-                className="fixed text-center bottom-16 right-12 md:bottom-10  md:right-12 text-white px-22 py-2 rounded text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl"
-                style={{ fontFamily: "'Dancing Script', cursive", textShadow: '0 0 10px yellow' }}
-            >
-                Skip {'>>'}
-            </Link>
-            <Link
-                to="/cart"
-                className="fixed text-center bottom-16 left-12 md:bottom-10 md:left-12  text-white px-22 py-2 rounded text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl"
-                style={{ fontFamily: "'Dancing Script', cursive", textShadow: '0 0 10px yellow' }}
-            >
-                {'<<'} Go Back
-            </Link>
-
-
+            <div className="fixed bottom-0 left-0 pb-4">
+                <Link
+                    to="/cart"
+                    className="text-center text-white px-6 py-2 bg-black rounded-full"
+                    style={{ fontFamily: "'Dancing Script', cursive", fontSize: '1.5rem', textShadow: '0 0 5px yellow' }}
+                >
+                    {'<<'} Go Back
+                </Link>
+            </div>
+            <div className="fixed bottom-0 right-0 pb-4">
+                <Link
+                    to="/payment"
+                    className="text-center text-white px-6 py-2 bg-black rounded-full"
+                    style={{ fontFamily: "'Dancing Script', cursive", fontSize: '1.5rem', textShadow: '0 0 5px yellow' }}
+                >
+                    Skip {'>>'}
+                </Link>
+            </div>
         </div>
     );
+
 }
 
 export default Recommendation2Page;

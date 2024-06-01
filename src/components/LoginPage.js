@@ -93,6 +93,8 @@ const LoginPage = () => {
       <div className="p-4">
         <img src={logo} alt="Intellimart logo" style={{ height: '8rem' }} />
       </div>
+     
+      <div className="flex flex-col justify-center items-center h-screen">
       <div className="text-center mb-3">
         <h1 style={{ fontFamily: "'Dancing Script', cursive", fontSize: '4rem', textShadow: '0 0 10px yellow' }}>
           Welcome to IntelliMart
@@ -102,7 +104,7 @@ const LoginPage = () => {
         <h1 className="text-4xl text-center text-black-500 mb-6" style={{ fontFamily: "'Cinzel',serif" }}>Login with Email</h1>
         <form className="max-w-md mx-auto text-black" onSubmit={handleSubmission}>
           <input
-            className="w-full mb-2 px-3 py-2 border"
+            className="w-36 mb-2 px-3 py-2 border"
             type="email"
             placeholder="Email"
             name="email"
@@ -121,9 +123,11 @@ const LoginPage = () => {
           />
           <b className='text-red-500'>{errorMsg}</b>
           <button
-            className="w-full mt-2 py-2 text-white primary rounded-md relative" // Add relative positioning
+            
+            className="w-[full] mt-2 py-2 text-white primary rounded-md relative flex justify-center mx-auto"
             onClick={handleSubmission}
             disabled={submitButtonDisabled}
+            style={{ width: '90%', }}
           >
             {loading && ( 
               <CgSpinner size={20} className="absolute animate-spin" />
@@ -152,6 +156,7 @@ const LoginPage = () => {
             </Link>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );

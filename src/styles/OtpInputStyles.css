@@ -1,0 +1,28 @@
+.otp-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .otp-container input {
+    width: 48px !important;
+    height: 48px !important;
+    text-align: center !important;
+    font-size: 18px;
+    border: 1x solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    margin: 0 -12px;
+    transition: all 0.3s ease;
+  }
+  
+  .otp-container input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  }
+  
+  .otp-container input::placeholder {
+    color: #ccc;
+  }
+  

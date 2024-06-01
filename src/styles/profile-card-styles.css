@@ -264,7 +264,7 @@ body {
 
     .profile-card-wrapper {
         flex-direction: column;
-        height: 100vh;
+        height: 105vh;
         width: 80vw; /* Adjusted width */
         margin-top: 40%;
     }

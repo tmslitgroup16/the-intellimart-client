@@ -254,7 +254,7 @@ const [openModal, setOpenModal] = useState(false);
       </Link>
     </div>
 
-    <div className="flex items-center gap-6 md:gap-8 px-10 py-3 -ml-10 md:ml-0">
+    <div className="flex items-center gap-5 md:gap-8 px-10 py-3 -ml-10 md:ml-0">
       {/* Search bar */}
     <div className="search-container">
       {!isProfilePage && !isPrivacyPage && !isReturnPage && !isShippingPage && !isTermsPage && !isPurchaseHistoryPage && (
@@ -325,7 +325,7 @@ const [openModal, setOpenModal] = useState(false);
     </div>
 
       <div className="icons-container">
-          <div className="flex items-center gap-3 xs:gap-4">
+          <div className="flex items-center gap-2.5 xs:gap-4">
         
             <div>
             <div onClick={() => setShowLogoutModal(true)} className="z-10 py-1 icon-container" style={{ cursor: 'pointer', position: 'relative' }}>

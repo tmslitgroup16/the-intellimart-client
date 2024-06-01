@@ -58,12 +58,12 @@ const ProfilePage = () => {
         <>
             <div className="container">
                 {/* <div className="profile-card-wrapper !mt-12 !md:mt-auto"> */}
-                <div className="profile-card-wrapper !mt-28 md:!mt-0">
+                <div className="profile-card-wrapper !mt-34 md:!mt-0">
                     <div className="profile-card-left flex items-center justify-center ">
                         <img src={defaultProfilePic} alt="user" width="100" />
                         <div className="flex flex-col items-center justify-center">
                             <h4>User ID</h4>
-                            <p>{auth.currentUser ? auth.currentUser.uid : 'No user'}</p>
+                            <p className="!text-xs">{auth.currentUser ? auth.currentUser.uid : 'No user'}</p>
                         </div>
                     </div>
                     <div className="profile-card-right">

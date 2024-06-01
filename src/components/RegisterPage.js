@@ -116,19 +116,104 @@ const RegisterPage = () => {
       });
   };
 
+  // return (
+  //   <div className="background main">
+  //     <div className="p-4 ">
+  //       <img src={logo} alt="Intellimart logo" style={{ height: '8rem' }} />
+  //     </div>
+  //     <div className="text-center mb-3">
+  //       <h1 style={{ fontFamily: "'Dancing Script', cursive", fontSize: '4rem', textShadow: '0 0 10px yellow' }}>
+  //         Welcome to IntelliMart
+  //       </h1>
+  //     </div>
+  //     <div className="mb-64 rounded-lg shadow-md relative z-10 ">
+  //       <h1 className="text-4xl text-center text-black-500 mb-6" style={{ fontFamily: "'Cinzel',serif" }}>Register with Email</h1>
+  //       <form className="max-w-md my-5 mx-auto text-black" //onSubmit={sendOTP} 
+  //       >
+  //         {!isOTP ? (<>
+  //           <input type="text"
+  //             placeholder="Full name"
+  //             onChange={(event) =>
+  //               setValues((prev) => ({ ...prev, name: event.target.value }))
+  //             }
+  //           />
+  //           <input type="email"
+  //             placeholder="Email"
+  //             onChange={(event) =>
+  //               setValues((prev) => ({ ...prev, email: event.target.value }))
+  //             }
+  //           />
+  //           <input type="password"
+  //             placeholder="Password"
+  //             onChange={(event) =>
+  //               setValues((prev) => ({ ...prev, pass: event.target.value }))
+  //             }
+  //           />
+
+  //           <b className='text-red-500'>{errorMsg}</b>
+  //           <button className="primary relative" onClick={sendOTP}>
+  //             {loading && (
+  //               <CgSpinner size={20} className="absolute animate-spin" />
+  //             )}
+  //             <span>Proceed</span>
+  //           </button>
+
+  //         </>) : (<>
+
+  //           <input type="text"
+  //             value={code}
+  //             placeholder="OTP"
+  //             onChange={(event) =>
+  //               setCode(event.target.value)
+  //             }
+  //           />
+  //           <b className='text-red-500'>{errorMsg}</b>
+  //           <button className="primary relative w-[200px]" onClick={handleSubmission}>
+  //             {loading && (
+  //               <CgSpinner size={20} className="absolute animate-spin" />
+  //             )}
+  //             <span>Register</span>
+  //           </button>
+
+  //           <button
+  //             className="w-full mt-2 py-2 text-white primary rounded-md"
+  //             onClick={() => window.location.reload()}
+  //           >
+  //             Go Back
+  //           </button>
+  //         </>)}
+  //         <div className="text-center py-2 text-yellow-100">
+  //           To Login with Email,{' '}
+  //           <Link className="underline text-red-500" to='/login'>Click here</Link>
+  //         </div>
+
+  //         <div className="text-center py-2 text-yellow-100">
+  //           To Register/Login with Phone number,{' '}
+  //           <Link className="underline text-red-500" to="/phone">
+  //             Click here
+  //           </Link>
+  //         </div>
+  //       </form>
+  //     </div>
+  //   </div>
+  // );
+
+
   return (
     <div className="background main">
-      <div className="p-4 ">
+      <div className="p-4 mb-2  ">
         <img src={logo} alt="Intellimart logo" style={{ height: '8rem' }} />
       </div>
-      <div className="text-center mb-3">
+      
+      <div className="flex flex-col justify-center items-center h-screen">
+      <div className="text-center mt-16 mb-3">
         <h1 style={{ fontFamily: "'Dancing Script', cursive", fontSize: '4rem', textShadow: '0 0 10px yellow' }}>
           Welcome to IntelliMart
         </h1>
       </div>
       <div className="mb-64 rounded-lg shadow-md relative z-10 ">
-        <h1 className="text-4xl text-center text-black-500 mb-6" style={{ fontFamily: "'Cinzel',serif" }}>Register with Email</h1>
-        <form className="max-w-md my-5 mx-auto text-black" //onSubmit={sendOTP} 
+        <h1 className="text-4xl text-center text-black-500 " style={{ fontFamily: "'Cinzel',serif" }}>Register with Email</h1>
+        <form className="max-w-md my-2 mx-auto text-black" //onSubmit={sendOTP} 
         >
           {!isOTP ? (<>
             <input type="text"
@@ -151,7 +236,11 @@ const RegisterPage = () => {
             />
 
             <b className='text-red-500'>{errorMsg}</b>
-            <button className="primary relative" onClick={sendOTP}>
+            <button  
+             className="w-[full] mt-1 py-2 text-white primary rounded-md relative flex justify-center mx-auto"
+             onClick={sendOTP}
+             style={{ width: '90%', }}
+            >
               {loading && (
                 <CgSpinner size={20} className="absolute animate-spin" />
               )}
@@ -176,27 +265,30 @@ const RegisterPage = () => {
             </button>
 
             <button
-              className="w-full mt-2 py-2 text-white primary rounded-md"
+              className="w-full mt-1 py-2 text-white primary rounded-md"
               onClick={() => window.location.reload()}
             >
               Go Back
             </button>
           </>)}
-          <div className="text-center py-2 text-yellow-100">
+          <div className="text-center pt-2 text-yellow-100 ">
             To Login with Email,{' '}
             <Link className="underline text-red-500" to='/login'>Click here</Link>
           </div>
 
-          <div className="text-center py-2 text-yellow-100">
+          <div className="text-center pb-9 text-yellow-100">
             To Register/Login with Phone number,{' '}
             <Link className="underline text-red-500" to="/phone">
               Click here
             </Link>
           </div>
         </form>
+        
+      </div>
       </div>
     </div>
   );
+
 }
 
 export default RegisterPage

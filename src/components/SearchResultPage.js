@@ -97,7 +97,7 @@ const SearchResultPage = () => {
         </h2>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-4 md:mx-8 lg:mx-16'>
           {Products.map((product) => (
-            <div key={product.id} className='bg-white p-4 rounded-lg shadow-md hover:shadow-lg'>
+            <div key={product.id} className='bg-white p-4 mb-16 rounded-lg shadow-md hover:shadow-lg'>
               <img src={product.url} alt={product.name} className='w-full h-64 object-contain mb-4' />
               <h3 className='text-lg font-semibold'>{product.name}</h3>
               <p className='text-gray-600'>Price: ₹{product.price}</p>

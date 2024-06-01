@@ -173,7 +173,7 @@ const BarcodeScanner = () => {
           <div id="scanner-container"></div>
           <button
             onClick={closeScanner}
-            className="bg-gradient-to-r from-teal-500 to-teal-700 text-white px-6 mt-15 text-sm py-2 rounded-md self-end"
+            className="bg-gradient-to-r from-teal-500 to-teal-700 text-white px-6 mt-15 text-sm py-2 rounded-md self-center 2xl:self-end"
           >
             Close scanner
           </button>
