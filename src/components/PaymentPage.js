@@ -462,7 +462,7 @@ const PaymentPage = () => {
         <div>
           <div style={{ marginTop: '70px' }}>
             <div style={{ marginLeft: '32px' }}>
-              <Link to="/" className="flex">
+              <Link className="flex">
                 <img src={logo} alt="The IntelliMart logo" style={{ height: '4.2rem' }} />
               </Link>
             </div>
@@ -514,7 +514,7 @@ const PaymentPage = () => {
       ) : (
         <div style={{ marginTop: '70px' }}>
           <div style={{ marginLeft: '32px' }}>
-              <Link to="/" className="flex">
+              <Link className="flex">
                 <img src={logo} alt="The IntelliMart logo" style={{ height: '4.2rem' }} />
               </Link>
             </div>
@@ -576,23 +576,7 @@ const PaymentPage = () => {
             >
               Shop Again
             </button>
-            {/* {isWideScreen ? (
-              <button
-                className="bg-gradient-to-r from-teal-500 to-teal-700 text-white px-6 py-3 text-lg"
-                onClick={getInvoiceUrl}
-                style={{ position: 'fixed', bottom: '20px', left: 'calc(50% - 110px)' }}
-              >
-                QR code for Invoice
-              </button>
-            ) : (
-              <p
-                className="text-blue-600 text-sm underline cursor-pointer"
-                onClick={getInvoiceUrl}
-                style={{ position: 'fixed', bottom: '20px', left: 'calc(50% - 35px)' }}
-              >
-                 Invoice
-              </p>
-            )} */}
+
             <button
               className="bg-gradient-to-r from-teal-500 to-teal-700 text-white px-6 py-3 text-lg"
               onClick={() => setShowLogoutModal(true)}
